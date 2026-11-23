@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Shop Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg1:#0b1626;--bg2:#08111e;--ice:#e8f1fb;--text:#9db0c6;--muted:#6f839b;--line:#22344c;--blue:#6fa8ff;--card:#0e1c30;
+  box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+html{color-scheme:dark}*{box-sizing:border-box;margin:0}
+body{background:linear-gradient(180deg,var(--bg1),var(--bg2)) fixed;color:var(--text);font:400 15px/1.55 'Instrument Sans',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:calc(22px + env(safe-area-inset-top,0px)) clamp(16px,4vw,48px) 22px}
+.logo{display:flex;align-items:center;gap:9px;color:var(--ice);font-weight:600;font-size:16px}
+.logo i{width:12px;height:12px;background:var(--blue);transform:rotate(45deg);border-radius:2px}
+.contact{font-size:14px;color:var(--text);text-decoration:none}a.contact:hover{color:var(--ice)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:48px clamp(16px,4vw,28px) 40px}
+h1{font-size:clamp(40px,7vw,72px);font-weight:600;letter-spacing:-.035em;line-height:1.02;color:var(--ice)}
+.sub{margin-top:14px;max-width:560px;font-size:16px}.sub b{color:var(--ice);font-weight:500}
+.meta{margin-top:6px;font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:40px}
+.item{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
+.pic{aspect-ratio:4/5;position:relative;background:#0c1829}
+.strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:100%;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;display:block}
+.arrow{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:rgba(8,17,30,.78);border:1px solid var(--line);color:var(--ice);display:grid;place-items:center;font-size:18px;line-height:1}
+.arrow:hover{border-color:#3a5272}.arrow.l{left:10px}.arrow.r{right:10px}
+.num{position:absolute;bottom:10px;right:10px;font-size:12px;padding:3px 9px;border-radius:999px;background:rgba(8,17,30,.85);color:var(--ice);border:1px solid var(--line)}
+.info{padding:14px 16px 16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.info b{color:var(--ice);font-weight:500;font-size:16px}
+.price{color:var(--ice);font-weight:600;font-size:17px;flex:none}
+footer{max-width:1040px;margin:0 auto;padding:30px 20px 56px;text-align:center;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><i></i><span id="brand">Your Shop Name</span></div>
+  <span id="contact" class="contact"></span>
+</header>
+
+<main class="wrap">
+  <h1>The rack</h1>
+  <p class="sub" id="how"></p>
+  <p class="meta" id="meta"></p>
+  <div class="grid" id="grid"></div>
+</main>
+<footer id="foot"></footer>
+
+<script>
+/* ============ EDIT THIS PART ============
+   Change the shop details and replace the sample items with your own.
+   images: add as many photos per item as you like, separated by commas.
+           Use '' for a placeholder photo.                                */
+var SHOP={
+  name:'dylan',
+  contactLabel:'TikTok',
+  contactHandle:'@d9249230',
+  contactLink:'tiktok.com/@d9249230',                       // e.g. 'https://instagram.com/yourhandle'
+  payment:'Cash, Cashapp, Paypal'
+};
+var ITEMS=[
+  {name:'Essentials Fear of God Hoodie', price:50, images:['https://fearofgod.com/cdn/shop/files/192AS262071F_CLASSIC_FIT_FLEECE_ZIP_UP_HOODIE-VINTAGE_BLACK_WHITE_2.jpg?v=1770738701&width=2560', 'https://i.ebayimg.com/images/g/YqsAAeSwzp1p2wNn/s-l400.jpg', 'https://fearofgod.com/cdn/shop/files/192AS262072F_CLASSIC_FIT_FLEECE_ZIP_UP_HOODIE-HOMESTEAD_HEATHER_2_7b3f75ef-2bbe-4f95-b9f6-372b18cc951a.jpg?v=1776264814&width=2560']},   // 3 photos
+  {name:'Chrome Hearts Long Sleeve', price:40, images:['https://cdn.shopify.com/s/files/1/0776/5816/1376/files/3a981ae5.jpg?v=1775632751', 'https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/103/175/016/original/1464231_01.jpg.jpeg?width=750']},      // 2 photos
+  {name:'sp5der Hoodies', price:57, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-zL06L-wvJYNQwwEVsvUfYuAHCEI2umjyYacIvM6va4QsMs3R_lgfjCho&s=10', 'https://undergroundclothing.com/cdn/shop/files/shopping_252b7ee4-e160-4ef5-8dd5-4bbd4eb44844.webp?v=1772663510&width=800']},         // 1 photo
+  {name:'Balenciaga Tape Shirt', price:68, images:['https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/088/011/659/original/1197778_01.jpg.jpeg?action=crop&width=750', 'https://cdn-images.farfetch-contents.com/30/97/18/28/30971828_59957690_1000.jpg']},
+  {name:'Bape Shirt', price:50, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVEXCMtJpwKGOkOs6WwUaXlBMeTIvEqEX7hleJ2hLmbDurdiiZqGQGn2Zj&s=10', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW3EjjNwseFdkdGfNnmRIC-vC4s7Oq2k8l_Qu0khOsKw&s=10']},
+  {name:'Chrome Hearts Jorts', price:70, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRsJOVNAJ7nIAtX8iVY8BRXQtzLiNcBcbzgQsOGQh2MdbaPRbKOaZblnQ&s=10']},
+  //new
+  {name:'Hellstar Shirt', price:60, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/0292c795-8b98-4c08-bc7f-bee607ae0b01.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/7bd36cf8-f71e-4a1a-a7f6-24e034fff0ea.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/7f63a567-d4ab-463f-a433-9e1a1dd99236.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/55b90b58-3db4-4c4f-b3be-144d97458bc3.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/d730110c-e0a2-4c7b-bd75-be4332d963cd.jpg']},   // 3 photos
+  {name:'Double Waisted Balenciaga Jeans', price:90, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/s/01/fe44ea42-4383-4a14-bb24-dffa7bbbaeff.JPG']},      // 2 photos
+  {name:'Hellstar Shorts', price:45, images:['https://images.stockx.com/images/Hellstar-Sports-Flame-Shorts-Black.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&q=60&dpr=1&trim=color&updated_at=1710549827', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1uhz2Mxbx4HtL1guiaiW4MWTNjIinAnVLnYZYRHMx8w&s=10']},         // 1 photo
+  {name:'Chief Keef Polos', price:45, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/38980d91-23bf-40c2-8512-da3632df7814.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/b25a1e8f-bab4-4e34-9774-184e5b1e218e.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/939e8950-2917-4fea-93f1-5814613210d9.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/5a4540c9-01a5-4b55-adaa-dac36af655f7.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/73aa0a5e-12f5-4c64-95fd-48b2fd4797d0.jpg']},
+  {name:'Vale Jacket', price:70, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/5af3a5ba-f513-4803-b57e-ffed7787336b.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/06db74e7-7031-4513-b9b9-b4bd5a0c565c.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/08adb506-7e68-4526-a1c9-e3dd3991ba4f.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/58792f09-7368-409b-8fe6-ea5c061bbe07.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/c0d3ed84-4e37-4579-bb83-c4686bcc7109.jpg',]},
+  {name:'Vale Pants', price:70, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/b98fb00b-5cad-4fc2-9bc7-54e530a2760d.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/ecec2ba5-44b6-4729-a80f-7f213512482c.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/94e05aa0-f083-4b45-ae88-28b91e0d50d9.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/a7ebbbd6-e37f-4e98-bbac-a61fda82bc27.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/695c1946-f87c-4d36-85fc-25b5357c0341.jpg',]}
+];
+/* ============ END OF EDIT AREA ============ */
+
+var $=function(id){return document.getElementById(id)};
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function safe(u){try{var x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:''}catch(e){return ''}}
+function placeholder(){
+  var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14294a"/><stop offset="1" stop-color="#0b1829"/></linearGradient></defs><rect width="400" height="500" fill="url(#g)"/><text x="200" y="256" font-family="sans-serif" font-size="20" fill="#6f839b" text-anchor="middle">Photo coming soon</text></svg>';
+  return 'data:image/svg+xml,'+encodeURIComponent(s)}
+function imgSrc(u){u=u||'';return safe(u)||(/^data:image\//.test(u)?u:placeholder())}
+
+document.title=SHOP.name;$('brand').textContent=SHOP.name;
+var link=safe(SHOP.contactLink),c=$('contact');
+if(link){var a=el('a','contact',SHOP.contactLabel+': '+SHOP.contactHandle);a.href=link;a.target='_blank';a.rel='noopener noreferrer';c.replaceWith(a)}
+else c.textContent=SHOP.contactLabel+': '+SHOP.contactHandle;
+
+var how=$('how');how.append('Images are not final, designs are messed up to prevent bot purchases. Everything is available in all sizes and colors. Ordering? Message me on '+SHOP.contactLabel+' at ');
+how.appendChild(el('b','',SHOP.contactHandle));how.append(' with what you want.');
+$('meta').textContent='Payment: '+SHOP.payment;
+
+var g=$('grid');
+ITEMS.forEach(function(it){
+  var imgs=(it.images&&it.images.length)?it.images:[''],card=el('div','item'),pic=el('div','pic'),strip=el('div','strip');
+  imgs.forEach(function(u){var im=el('img');im.src=imgSrc(u);im.alt=it.name;im.loading='lazy';strip.appendChild(im)});
+  pic.appendChild(strip);
+  if(imgs.length>1){
+    var n=el('span','num','1 / '+imgs.length);
+    var l=el('button','arrow l','‹'),r=el('button','arrow r','›');
+    l.type=r.type='button';l.setAttribute('aria-label','Previous photo');r.setAttribute('aria-label','Next photo');
+    l.onclick=function(){strip.scrollBy({left:-strip.clientWidth,behavior:'smooth'})};
+    r.onclick=function(){strip.scrollBy({left:strip.clientWidth,behavior:'smooth'})};
+    strip.addEventListener('scroll',function(){n.textContent=(Math.round(strip.scrollLeft/strip.clientWidth)+1)+' / '+imgs.length});
+    pic.appendChild(l);pic.appendChild(r);pic.appendChild(n);
+  }
+  card.appendChild(pic);
+  var inf=el('div','info');inf.appendChild(el('b','',it.name));inf.appendChild(el('span','price','$'+it.price));
+  card.appendChild(inf);g.appendChild(card)});
+</script>
+</body>
+</html>
