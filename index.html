@@ -3,78 +3,111 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 <title>Your Shop Name</title>
+<link rel="icon" href="https://i.imgur.com/TTlHzhM.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
-:root{--bg1:#0b1626;--bg2:#08111e;--ice:#e8f1fb;--text:#9db0c6;--muted:#6f839b;--line:#22344c;--blue:#6fa8ff;--card:#0e1c30;
+:root{--bg:#000;--card:#080808;--raise:#101010;--ice:#f2f6fb;--text:#a3adba;--muted:#6b7480;--line:#1a1a1a;--line2:#2a2a2a;--blue:#6fa8ff;
   box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
-html{color-scheme:dark}*{box-sizing:border-box;margin:0}
-body{background:linear-gradient(180deg,var(--bg1),var(--bg2)) fixed;color:var(--text);font:400 15px/1.55 'Instrument Sans',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:calc(22px + env(safe-area-inset-top,0px)) clamp(16px,4vw,48px) 22px}
+html{color-scheme:dark;scroll-behavior:smooth}*{box-sizing:border-box;margin:0}
+body{background:#000;color:var(--text);font:400 15px/1.55 'Instrument Sans',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:calc(18px + env(safe-area-inset-top,0px)) clamp(16px,4vw,48px) 18px;border-bottom:1px solid var(--line)}
 .logo{display:flex;align-items:center;gap:9px;color:var(--ice);font-weight:600;font-size:16px}
-.logo i{width:12px;height:12px;background:var(--blue);transform:rotate(45deg);border-radius:2px}
-.contact{font-size:14px;color:var(--text);text-decoration:none}a.contact:hover{color:var(--ice)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.wrap{max-width:1040px;margin:0 auto;padding:48px clamp(16px,4vw,28px) 40px}
-h1{font-size:clamp(40px,7vw,72px);font-weight:600;letter-spacing:-.035em;line-height:1.02;color:var(--ice)}
-.sub{margin-top:14px;max-width:560px;font-size:16px}.sub b{color:var(--ice);font-weight:500}
-.meta{margin-top:6px;font-size:14px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:40px}
-.item{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
-.pic{aspect-ratio:4/5;position:relative;background:#0c1829}
+.logo img{width:36px;height:36px;object-fit:contain;border-radius:8px;display:block}
+.contact{font-size:14px;color:var(--ice);text-decoration:none;border:1px solid var(--line2);padding:7px 14px;border-radius:999px;transition:border-color .15s,background .15s}
+a.contact:hover{border-color:var(--blue);background:var(--raise)}
+.wrap{max-width:1100px;margin:0 auto;padding:56px clamp(16px,4vw,28px) 40px}
+h1{font-size:clamp(44px,8vw,84px);font-weight:600;letter-spacing:-.04em;line-height:1;color:var(--ice)}
+.sub{margin-top:16px;max-width:580px;font-size:16px}.sub b{color:var(--ice);font-weight:500}
+.notice{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:8px 14px;background:var(--card)}
+.notice b{color:var(--ice);font-weight:500}
+.bar{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:calc(12px + env(safe-area-inset-top,0px)) clamp(16px,4vw,28px) 12px}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chip{all:unset;cursor:pointer;flex:none;font-size:14px;color:var(--text);padding:7px 14px;border-radius:999px;border:1px solid var(--line2);transition:all .15s}
+.chip:hover{color:var(--ice);border-color:#444}
+.chip[aria-pressed=true]{background:var(--ice);color:#000;border-color:var(--ice);font-weight:500}
+.chip small{font-size:12px;opacity:.6;margin-left:5px}
+select{flex:none;background:var(--card);color:var(--ice);border:1px solid var(--line2);border-radius:10px;padding:7px 10px;font:inherit;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-top:32px}
+.item{border:1px solid var(--line);background:var(--card);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s}
+.item:hover{border-color:var(--line2)}
+.pic{aspect-ratio:4/5;position:relative;background:#050505}
 .strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:100%;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
 .strip img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;display:block}
-.arrow{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:rgba(8,17,30,.78);border:1px solid var(--line);color:var(--ice);display:grid;place-items:center;font-size:18px;line-height:1}
-.arrow:hover{border-color:#3a5272}.arrow.l{left:10px}.arrow.r{right:10px}
-.num{position:absolute;bottom:10px;right:10px;font-size:12px;padding:3px 9px;border-radius:999px;background:rgba(8,17,30,.85);color:var(--ice);border:1px solid var(--line)}
-.info{padding:14px 16px 16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.info b{color:var(--ice);font-weight:500;font-size:16px}
-.price{color:var(--ice);font-weight:600;font-size:17px;flex:none}
-footer{max-width:1040px;margin:0 auto;padding:30px 20px 56px;text-align:center;font-size:13px;color:var(--muted)}
+.arrow{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.75);border:1px solid var(--line2);color:var(--ice);display:grid;place-items:center;font-size:18px;line-height:1;opacity:0;transition:opacity .15s}
+.pic:hover .arrow,.arrow:focus-visible{opacity:1}
+@media(hover:none){.arrow{opacity:.9}}
+.arrow.l{left:10px}.arrow.r{right:10px}
+.num{position:absolute;bottom:10px;right:10px;font-size:12px;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.8);color:var(--ice);border:1px solid var(--line2)}
+.tag{position:absolute;top:10px;left:10px;font-size:12px;padding:3px 10px;border-radius:999px;background:rgba(0,0,0,.8);color:var(--text);border:1px solid var(--line2)}
+.info{padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.info b{color:var(--ice);font-weight:500;font-size:16px;line-height:1.3}
+.price{color:var(--ice);font-weight:600;font-size:18px;flex:none}
+.buy{margin:6px 16px 16px;text-align:center;text-decoration:none;color:var(--ice);font-size:14px;font-weight:500;padding:9px;border-radius:10px;border:1px solid var(--line2);transition:all .15s}
+.buy:hover{background:var(--ice);color:#000;border-color:var(--ice)}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
+footer{max-width:1100px;margin:0 auto;padding:30px 20px 56px;text-align:center;font-size:13px;color:var(--muted)}
+@media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.info{flex-direction:column;gap:2px;padding:12px 12px 6px}.buy{margin:6px 12px 12px}.price{font-size:16px}.info b{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo"><i></i><span id="brand">Your Shop Name</span></div>
+  <div class="logo"><img src="https://i.imgur.com/TTlHzhM.png" alt="" width="36" height="36"></div>
   <span id="contact" class="contact"></span>
 </header>
 
-<main class="wrap">
-  <h1>The rack</h1>
-  <p class="sub" id="how"></p>
-  <p class="meta" id="meta"></p>
-  <div class="grid" id="grid"></div>
+<main>
+  <div class="wrap" style="padding-bottom:36px">
+    <h1>The rack</h1>
+    <p class="sub" id="how"></p>
+    <p class="notice" id="meta"></p>
+  </div>
+  <div class="bar"><div class="bar-in">
+    <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+    <select id="sort" aria-label="Sort items">
+      <option value="">Featured</option>
+      <option value="asc">Price: low to high</option>
+      <option value="desc">Price: high to low</option>
+    </select>
+  </div></div>
+  <div class="wrap" style="padding-top:0"><div class="grid" id="grid"></div></div>
 </main>
 <footer id="foot"></footer>
 
 <script>
 /* ============ EDIT THIS PART ============
    Change the shop details and replace the sample items with your own.
+   cat:    the category (Hoodies, Tops, Bottoms, Outerwear, or any new name you like).
+           Category buttons are created automatically from these.
    images: add as many photos per item as you like, separated by commas.
            Use '' for a placeholder photo.                                */
 var SHOP={
   name:'dylan',
   contactLabel:'TikTok',
   contactHandle:'@d9249230',
-  contactLink:'tiktok.com/@d9249230',                       // e.g. 'https://instagram.com/yourhandle'
+  contactLink:'https://tiktok.com/@d9249230',
   payment:'Cash, Cashapp, Paypal'
 };
 var ITEMS=[
-  {name:'Essentials Fear of God Hoodie', price:50, images:['https://fearofgod.com/cdn/shop/files/192AS262071F_CLASSIC_FIT_FLEECE_ZIP_UP_HOODIE-VINTAGE_BLACK_WHITE_2.jpg?v=1770738701&width=2560', 'https://i.ebayimg.com/images/g/YqsAAeSwzp1p2wNn/s-l400.jpg', 'https://fearofgod.com/cdn/shop/files/192AS262072F_CLASSIC_FIT_FLEECE_ZIP_UP_HOODIE-HOMESTEAD_HEATHER_2_7b3f75ef-2bbe-4f95-b9f6-372b18cc951a.jpg?v=1776264814&width=2560']},   // 3 photos
-  {name:'Chrome Hearts Long Sleeve', price:40, images:['https://cdn.shopify.com/s/files/1/0776/5816/1376/files/3a981ae5.jpg?v=1775632751', 'https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/103/175/016/original/1464231_01.jpg.jpeg?width=750']},      // 2 photos
-  {name:'sp5der Hoodies', price:57, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-zL06L-wvJYNQwwEVsvUfYuAHCEI2umjyYacIvM6va4QsMs3R_lgfjCho&s=10', 'https://undergroundclothing.com/cdn/shop/files/shopping_252b7ee4-e160-4ef5-8dd5-4bbd4eb44844.webp?v=1772663510&width=800']},         // 1 photo
-  {name:'Balenciaga Tape Shirt', price:68, images:['https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/088/011/659/original/1197778_01.jpg.jpeg?action=crop&width=750', 'https://cdn-images.farfetch-contents.com/30/97/18/28/30971828_59957690_1000.jpg']},
-  {name:'Bape Shirt', price:50, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVEXCMtJpwKGOkOs6WwUaXlBMeTIvEqEX7hleJ2hLmbDurdiiZqGQGn2Zj&s=10', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW3EjjNwseFdkdGfNnmRIC-vC4s7Oq2k8l_Qu0khOsKw&s=10']},
-  {name:'Chrome Hearts Jorts', price:70, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRsJOVNAJ7nIAtX8iVY8BRXQtzLiNcBcbzgQsOGQh2MdbaPRbKOaZblnQ&s=10']},
-  //new
-  {name:'Hellstar Shirt', price:60, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/0292c795-8b98-4c08-bc7f-bee607ae0b01.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/7bd36cf8-f71e-4a1a-a7f6-24e034fff0ea.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/7f63a567-d4ab-463f-a433-9e1a1dd99236.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/55b90b58-3db4-4c4f-b3be-144d97458bc3.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/d730110c-e0a2-4c7b-bd75-be4332d963cd.jpg']},   // 3 photos
-  {name:'Double Waisted Balenciaga Jeans', price:90, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/s/01/fe44ea42-4383-4a14-bb24-dffa7bbbaeff.JPG']},      // 2 photos
-  {name:'Hellstar Shorts', price:45, images:['https://images.stockx.com/images/Hellstar-Sports-Flame-Shorts-Black.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&q=60&dpr=1&trim=color&updated_at=1710549827', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1uhz2Mxbx4HtL1guiaiW4MWTNjIinAnVLnYZYRHMx8w&s=10']},         // 1 photo
-  {name:'Chief Keef Polos', price:45, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/38980d91-23bf-40c2-8512-da3632df7814.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/b25a1e8f-bab4-4e34-9774-184e5b1e218e.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/939e8950-2917-4fea-93f1-5814613210d9.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/5a4540c9-01a5-4b55-adaa-dac36af655f7.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/73aa0a5e-12f5-4c64-95fd-48b2fd4797d0.jpg']},
-  {name:'Vale Jacket', price:70, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/5af3a5ba-f513-4803-b57e-ffed7787336b.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/06db74e7-7031-4513-b9b9-b4bd5a0c565c.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/08adb506-7e68-4526-a1c9-e3dd3991ba4f.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/58792f09-7368-409b-8fe6-ea5c061bbe07.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/c0d3ed84-4e37-4579-bb83-c4686bcc7109.jpg',]},
-  {name:'Vale Pants', price:70, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/b98fb00b-5cad-4fc2-9bc7-54e530a2760d.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/ecec2ba5-44b6-4729-a80f-7f213512482c.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/94e05aa0-f083-4b45-ae88-28b91e0d50d9.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/a7ebbbd6-e37f-4e98-bbac-a61fda82bc27.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/695c1946-f87c-4d36-85fc-25b5357c0341.jpg',]}
+  {name:'Essentials Fear of God Hoodie', cat:'Hoodies', price:50, images:['https://fearofgod.com/cdn/shop/files/192AS262071F_CLASSIC_FIT_FLEECE_ZIP_UP_HOODIE-VINTAGE_BLACK_WHITE_2.jpg?v=1770738701&width=2560', 'https://i.ebayimg.com/images/g/YqsAAeSwzp1p2wNn/s-l400.jpg', 'https://fearofgod.com/cdn/shop/files/192AS262072F_CLASSIC_FIT_FLEECE_ZIP_UP_HOODIE-HOMESTEAD_HEATHER_2_7b3f75ef-2bbe-4f95-b9f6-372b18cc951a.jpg?v=1776264814&width=2560']},
+  {name:'sp5der Hoodies', cat:'Hoodies', price:57, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-zL06L-wvJYNQwwEVsvUfYuAHCEI2umjyYacIvM6va4QsMs3R_lgfjCho&s=10', 'https://undergroundclothing.com/cdn/shop/files/shopping_252b7ee4-e160-4ef5-8dd5-4bbd4eb44844.webp?v=1772663510&width=800']},
+  {name:'Chrome Hearts Long Sleeve', cat:'Tops', price:40, images:['https://cdn.shopify.com/s/files/1/0776/5816/1376/files/3a981ae5.jpg?v=1775632751', 'https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/103/175/016/original/1464231_01.jpg.jpeg?width=750']},
+  {name:'Balenciaga Tape Shirt', cat:'Tops', price:68, images:['https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/088/011/659/original/1197778_01.jpg.jpeg?action=crop&width=750', 'https://cdn-images.farfetch-contents.com/30/97/18/28/30971828_59957690_1000.jpg']},
+  {name:'Bape Shirt', cat:'Tops', price:50, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVEXCMtJpwKGOkOs6WwUaXlBMeTIvEqEX7hleJ2hLmbDurdiiZqGQGn2Zj&s=10', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW3EjjNwseFdkdGfNnmRIC-vC4s7Oq2k8l_Qu0khOsKw&s=10']},
+  {name:'Chrome Hearts Jorts', cat:'Bottoms', price:70, images:['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRsJOVNAJ7nIAtX8iVY8BRXQtzLiNcBcbzgQsOGQh2MdbaPRbKOaZblnQ&s=10']},
+  {name:'Hellstar Shirt', cat:'Tops', price:60, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/0292c795-8b98-4c08-bc7f-bee607ae0b01.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/7bd36cf8-f71e-4a1a-a7f6-24e034fff0ea.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/7f63a567-d4ab-463f-a433-9e1a1dd99236.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/55b90b58-3db4-4c4f-b3be-144d97458bc3.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/m/17/d730110c-e0a2-4c7b-bd75-be4332d963cd.jpg']},
+  {name:'Double Waisted Balenciaga Jeans', cat:'Bottoms', price:90, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/s/01/fe44ea42-4383-4a14-bb24-dffa7bbbaeff.JPG']},
+  {name:'Hellstar Shorts', cat:'Bottoms', price:45, images:['https://images.stockx.com/images/Hellstar-Sports-Flame-Shorts-Black.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&q=60&dpr=1&trim=color&updated_at=1710549827', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1uhz2Mxbx4HtL1guiaiW4MWTNjIinAnVLnYZYRHMx8w&s=10']},
+  {name:'Chief Keef Polos', cat:'Tops', price:45, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/38980d91-23bf-40c2-8512-da3632df7814.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/b25a1e8f-bab4-4e34-9774-184e5b1e218e.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/939e8950-2917-4fea-93f1-5814613210d9.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/5a4540c9-01a5-4b55-adaa-dac36af655f7.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/z/15/73aa0a5e-12f5-4c64-95fd-48b2fd4797d0.jpg']},
+  {name:'Vale Jacket', cat:'Outerwear', price:70, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/5af3a5ba-f513-4803-b57e-ffed7787336b.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/06db74e7-7031-4513-b9b9-b4bd5a0c565c.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/08adb506-7e68-4526-a1c9-e3dd3991ba4f.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/58792f09-7368-409b-8fe6-ea5c061bbe07.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/c0d3ed84-4e37-4579-bb83-c4686bcc7109.jpg']},
+  {name:'Vale Pants', cat:'Bottoms', price:70, images:['https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/b98fb00b-5cad-4fc2-9bc7-54e530a2760d.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/ecec2ba5-44b6-4729-a80f-7f213512482c.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/94e05aa0-f083-4b45-ae88-28b91e0d50d9.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/a7ebbbd6-e37f-4e98-bbac-a61fda82bc27.jpg', 'https://img4.dhresource.com/webp/m/0x0/f3/albu/bw/t/10/695c1946-f87c-4d36-85fc-25b5357c0341.jpg']}
 ];
 /* ============ END OF EDIT AREA ============ */
 
@@ -82,24 +115,29 @@ var $=function(id){return document.getElementById(id)};
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function safe(u){try{var x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:''}catch(e){return ''}}
 function placeholder(){
-  var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14294a"/><stop offset="1" stop-color="#0b1829"/></linearGradient></defs><rect width="400" height="500" fill="url(#g)"/><text x="200" y="256" font-family="sans-serif" font-size="20" fill="#6f839b" text-anchor="middle">Photo coming soon</text></svg>';
+  var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><rect width="400" height="500" fill="#0a0a0a"/><text x="200" y="256" font-family="sans-serif" font-size="20" fill="#6b7480" text-anchor="middle">Photo coming soon</text></svg>';
   return 'data:image/svg+xml,'+encodeURIComponent(s)}
 function imgSrc(u){u=u||'';return safe(u)||(/^data:image\//.test(u)?u:placeholder())}
 
-document.title=SHOP.name;$('brand').textContent=SHOP.name;
+document.title=SHOP.name;
 var link=safe(SHOP.contactLink),c=$('contact');
 if(link){var a=el('a','contact',SHOP.contactLabel+': '+SHOP.contactHandle);a.href=link;a.target='_blank';a.rel='noopener noreferrer';c.replaceWith(a)}
 else c.textContent=SHOP.contactLabel+': '+SHOP.contactHandle;
 
-var how=$('how');how.append('Images are not final, designs are messed up to prevent bot purchases. Everything is available in all sizes and colors. Ordering? Message me on '+SHOP.contactLabel+' at ');
+var how=$('how');how.append('Everything is available in all sizes and colors. Ordering? Message me on '+SHOP.contactLabel+' at ');
 how.appendChild(el('b','',SHOP.contactHandle));how.append(' with what you want.');
-$('meta').textContent='Payment: '+SHOP.payment;
+var meta=$('meta');meta.appendChild(el('span','','Payment:'));meta.appendChild(el('b','',SHOP.payment));
+var note=el('p','notice','Images are not final. Designs are altered to prevent bot purchases.');note.style.marginLeft='8px';
+$('how').parentNode.appendChild(note);
 
-var g=$('grid');
-ITEMS.forEach(function(it){
-  var imgs=(it.images&&it.images.length)?it.images:[''],card=el('div','item'),pic=el('div','pic'),strip=el('div','strip');
-  imgs.forEach(function(u){var im=el('img');im.src=imgSrc(u);im.alt=it.name;im.loading='lazy';strip.appendChild(im)});
-  pic.appendChild(strip);
+var active='All',g=$('grid'),chips=$('chips');
+var cats=['All'];ITEMS.forEach(function(it){var k=it.cat||'Other';if(cats.indexOf(k)<0)cats.push(k)});
+function count(k){return k==='All'?ITEMS.length:ITEMS.filter(function(i){return (i.cat||'Other')===k}).length}
+
+function card(it){
+  var imgs=(it.images&&it.images.length)?it.images:[''],c=el('div','item'),pic=el('div','pic'),strip=el('div','strip');
+  imgs.forEach(function(u){var im=el('img');im.src=imgSrc(u);im.alt=it.name;im.loading='lazy';im.onerror=function(){im.onerror=null;im.src=placeholder()};strip.appendChild(im)});
+  pic.appendChild(strip);pic.appendChild(el('span','tag',it.cat||'Other'));
   if(imgs.length>1){
     var n=el('span','num','1 / '+imgs.length);
     var l=el('button','arrow l','‹'),r=el('button','arrow r','›');
@@ -109,9 +147,27 @@ ITEMS.forEach(function(it){
     strip.addEventListener('scroll',function(){n.textContent=(Math.round(strip.scrollLeft/strip.clientWidth)+1)+' / '+imgs.length});
     pic.appendChild(l);pic.appendChild(r);pic.appendChild(n);
   }
-  card.appendChild(pic);
+  c.appendChild(pic);
   var inf=el('div','info');inf.appendChild(el('b','',it.name));inf.appendChild(el('span','price','$'+it.price));
-  card.appendChild(inf);g.appendChild(card)});
+  c.appendChild(inf);
+  if(link){var b=el('a','buy','Order on '+SHOP.contactLabel);b.href=link;b.target='_blank';b.rel='noopener noreferrer';c.appendChild(b)}
+  return c}
+
+function render(){
+  var list=ITEMS.filter(function(i){return active==='All'||(i.cat||'Other')===active});
+  var s=$('sort').value;
+  if(s)list=list.slice().sort(function(a,b){return s==='asc'?a.price-b.price:b.price-a.price});
+  g.textContent='';
+  if(!list.length)g.appendChild(el('div','empty','Nothing here yet. Check back soon.'));
+  list.forEach(function(it){g.appendChild(card(it))})}
+
+cats.forEach(function(k){
+  var b=el('button','chip',k);b.type='button';b.setAttribute('aria-pressed',k===active);
+  b.appendChild(el('small','',count(k)));
+  b.onclick=function(){active=k;[].forEach.call(chips.children,function(x){x.setAttribute('aria-pressed',x===b)});render()};
+  chips.appendChild(b)});
+$('sort').onchange=render;
+render();
 </script>
 </body>
 </html>
